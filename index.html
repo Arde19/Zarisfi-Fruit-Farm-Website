@@ -1,238 +1,609 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Zarisfi Fruit Farm</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zarisfi Fruit Farm</title>
+  <style>
+    :root {
+      --primary: #c62828;
+      --primary-dark: #8e1b1b;
+      --secondary: #2e7d32;
+      --light: #fff8f6;
+      --text: #2b2b2b;
+      --muted: #666;
+      --white: #ffffff;
+      --shadow: 0 10px 30px rgba(0,0,0,0.08);
+      --radius: 18px;
+    }
 
-<style>
-:root {
-  --primary: #c62828;
-  --secondary: #2e7d32;
-  --white: #ffffff;
-}
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }
 
-/* RESET */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: var(--light);
+      line-height: 1.6;
+    }
 
-body {
-  font-family: Arial, sans-serif;
-  color: #222;
-  overflow-x: hidden;
+    img {
+      max-width: 100%;
+      display: block;
+    }
 
-  /* 🔥 Animated gradient background */
-  background: linear-gradient(-45deg, #fff5f5, #ffecec, #f3fff4, #eefaf0);
-  background-size: 400% 400%;
-  animation: gradientMove 12s ease infinite;
-}
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
 
-/* animation */
-@keyframes gradientMove {
-  0% {background-position: 0% 50%;}
-  50% {background-position: 100% 50%;}
-  100% {background-position: 0% 50%;}
-}
+    .container {
+      width: min(1100px, 92%);
+      margin: 0 auto;
+    }
 
-/* 🍓 floating strawberries */
-.berry {
-  position: fixed;
-  font-size: 2rem;
-  opacity: 0.15;
-  animation: float 10s ease-in-out infinite;
-}
+    header {
+      background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.35)),
+        url('./Picture of Farm.png') center/cover;
+      min-height: 90vh;
+      color: var(--white);
+      display: flex;
+      flex-direction: column;
+    }
 
-.berry:nth-child(1){top:10%; left:5%;}
-.berry:nth-child(2){top:30%; left:90%;}
-.berry:nth-child(3){top:70%; left:10%;}
-.berry:nth-child(4){top:80%; left:85%;}
-.berry:nth-child(5){top:50%; left:50%;}
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
 
-@keyframes float {
-  0% {transform: translateY(0);}
-  50% {transform: translateY(-20px);}
-  100% {transform: translateY(0);}
-}
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+      gap: 20px;
+    }
 
-/* NAV */
-nav {
-  background: rgba(255,255,255,0.9);
-  backdrop-filter: blur(10px);
-  padding: 15px;
-  position: sticky;
-  top: 0;
-}
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: var(--primary);
+      min-width: 0;
+    }
 
-.nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 90%;
-  margin: auto;
-}
+    .logo img {
+      width: 90px;
+      height: 90px;
+      object-fit: contain;
+      display: block;
+      border-radius: 12px;
+      flex-shrink: 0;
+    }
 
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
 
-.logo img {
-  width: 70px;
-}
+    .logo-text span {
+      font-size: 0.95rem;
+      color: var(--primary);
+      font-weight: 800;
+    }
 
-.nav a {
-  margin: 0 10px;
-  text-decoration: none;
-  font-weight: bold;
-  color: #333;
-}
+    .logo-text small {
+      font-size: 0.75rem;
+      color: var(--secondary);
+      font-weight: 700;
+    }
 
-/* HERO */
-header {
-  height: 90vh;
-  background: url("Picture of Farm.png") center/cover;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  text-align: center;
-}
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      font-weight: 600;
+      color: #333;
+    }
 
-header h1 {
-  font-size: 3rem;
-  text-shadow: 0 5px 20px rgba(0,0,0,0.4);
-}
+    .hero {
+      flex: 1;
+      display: flex;
+      align-items: center;
+    }
 
-/* SECTIONS */
-section {
-  padding: 80px 10%;
-}
+    .hero-content {
+      max-width: 700px;
+      padding: 70px 0;
+    }
 
-/* glass cards */
-.card {
-  background: rgba(255,255,255,0.85);
-  backdrop-filter: blur(10px);
-  padding: 25px;
-  border-radius: 15px;
-  margin-top: 20px;
-}
+    .hero h1 {
+      font-size: clamp(2.3rem, 5vw, 4.4rem);
+      line-height: 1.1;
+      margin-bottom: 18px;
+    }
 
-/* buttons */
-button {
-  padding: 12px;
-  border: none;
-  background: var(--primary);
-  color: white;
-  border-radius: 10px;
-  margin: 5px;
-  cursor: pointer;
-}
+    .hero p {
+      font-size: 1.1rem;
+      max-width: 620px;
+      margin-bottom: 30px;
+      color: #f8f8f8;
+    }
 
-/* footer */
-footer {
-  background: #222;
-  color: white;
-  text-align: center;
-  padding: 20px;
-}
-</style>
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 22px;
+      border-radius: 999px;
+      font-weight: bold;
+      transition: 0.25s ease;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: var(--white);
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.15);
+      border: 2px solid rgba(255,255,255,0.8);
+      color: var(--white);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.25);
+      transform: translateY(-2px);
+    }
+
+    section {
+      padding: 80px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 18px;
+      font-size: 2.2rem;
+      color: var(--primary);
+    }
+
+    .section-subtitle {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 40px;
+      color: var(--muted);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 35px;
+      align-items: center;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 32px;
+    }
+
+    .card {
+      background: var(--white);
+      padding: 28px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      height: 100%;
+    }
+
+    .card h3 {
+      margin-bottom: 12px;
+      color: var(--secondary);
+    }
+
+    .variety-buttons {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .variety-btn {
+      width: 100%;
+      padding: 16px;
+      border: none;
+      border-radius: 14px;
+      background: var(--primary);
+      color: var(--white);
+      font: inherit;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.25s ease;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
+
+    .variety-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    .variety-display {
+      margin-top: 20px;
+      background: #fffaf9;
+      border-left: 5px solid var(--secondary);
+      padding: 22px;
+      border-radius: 14px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+    }
+
+    .variety-display h4 {
+      color: var(--secondary);
+      margin-bottom: 10px;
+      font-size: 1.15rem;
+    }
+
+    .feature-list {
+      list-style: none;
+      display: grid;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .feature-list li {
+      background: var(--white);
+      padding: 14px 16px;
+      border-left: 5px solid var(--primary);
+      border-radius: 10px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+    }
+
+    .image-box img {
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      min-height: 360px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-top: 30px;
+    }
+
+    .stat {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.8rem;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .contact-box {
+      background: var(--white);
+      padding: 34px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    form {
+      display: grid;
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      font: inherit;
+    }
+
+    textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    footer {
+      background: #1f1f1f;
+      color: #eee;
+      padding: 30px 0;
+      text-align: center;
+    }
+
+    footer p {
+      color: #ccc;
+    }
+
+    .highlight {
+      color: var(--secondary);
+      font-weight: bold;
+    }
+
+    @media (max-width: 900px) {
+      .grid-2,
+      .card-grid,
+      .stats,
+      .variety-buttons {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        align-items: flex-start;
+      }
+
+      .nav-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-links {
+        gap: 12px;
+      }
+
+      .logo {
+        gap: 10px;
+      }
+
+      .logo img {
+        width: 70px;
+        height: 70px;
+      }
+
+      .logo-text span {
+        font-size: 0.85rem;
+      }
+
+      .logo-text small {
+        font-size: 0.7rem;
+      }
+    }
+  </style>
 </head>
-
 <body>
-
-<!-- 🍓 floating strawberries -->
-<div class="berry">🍓</div>
-<div class="berry">🍓</div>
-<div class="berry">🍓</div>
-<div class="berry">🍓</div>
-<div class="berry">🍓</div>
-
-<!-- NAV -->
-<nav>
-  <div class="nav">
-    <div class="logo">
-      <img src="logo.png">
-      <div>
-        <strong>Zarisfi Fruit Farm</strong><br>
-        <small>Fresh from Our Farm to You</small>
+  <nav>
+    <div class="container nav-inner">
+      <div class="logo">
+        <img src="./logo.png" alt="Zarisfi Fruit Farm Logo" onerror="this.style.display='none';" />
+        <div class="logo-text">
+          <span>Zarisfi Fruit Farm</span>
+          <small>Fresh from Our Farm to You</small>
+        </div>
+      </div>
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#about">About Us</a>
+        <a href="#strawberries">Strawberries</a>
+        <a href="#future">Future</a>
+        <a href="#contact">Contact</a>
       </div>
     </div>
+  </nav>
 
-    <div>
-      <a href="#about">About</a>
-      <a href="#strawberries">Strawberries</a>
-      <a href="#contact">Contact</a>
+  <header id="home">
+    <div class="container hero">
+      <div class="hero-content">
+        <h1>Fresh Strawberries, Grown Locally in Aberdeenshire</h1>
+        <p>
+          Welcome to Zarisfi Fruit Farm — a family-run strawberry farm focused on freshness,
+          quality, and direct-from-farm sales. We grow seasonal strawberries and sell them
+          on-site so our customers can enjoy fruit at its very best.
+        </p>
+        <div class="btn-group">
+          <a class="btn btn-primary" href="#about">Learn More</a>
+          <a class="btn btn-secondary" href="#contact">Contact Us</a>
+        </div>
+      </div>
     </div>
-  </div>
-</nav>
+  </header>
 
-<!-- HERO -->
-<header>
-  <div>
-    <h1>Fresh Strawberries from Our Farm</h1>
-  </div>
-</header>
-
-<!-- ABOUT -->
-<section id="about">
-  <h2>About Us</h2>
-
-  <div class="card">
-    <p>
-      Zarisfi Fruit Farm is a family-run business based in Aberdeenshire,
-      specialising in fresh strawberries sold directly to customers.
-    </p>
-
-    <img src="Picture of Me and Aryamehr.jpg" style="margin-top:20px; border-radius:10px;">
-  </div>
-</section>
-
-<!-- STRAWBERRIES -->
-<section id="strawberries">
-  <h2>Our Strawberries</h2>
-
-  <div class="card">
-    <button onclick="show('cambridge')">Cambridge Favourite</button>
-    <button onclick="show('arabella')">Arabella</button>
-    <button onclick="show('prize')">Prize</button>
-    <button onclick="show('murano')">Murano</button>
-
-    <div id="info" style="margin-top:20px;">
-      Click a strawberry to learn more
+  <section id="about">
+    <div class="container">
+      <h2 class="section-title">About Us</h2>
+      <p class="section-subtitle">
+        Zarisfi Fruit Farm is a newly established family partnership founded in 2025 and based at Mains of Drum, Aberdeenshire.
+      </p>
+      <div class="grid-2">
+        <div>
+          <p>
+            Our business was created to provide <span class="highlight">fresh, high-quality strawberries</span>
+            directly to local customers and visitors. By selling straight from the farm, we offer fruit with full freshness,
+            traceability, and competitive value.
+          </p>
+          <br />
+          <p>
+            The farm is run by brothers <strong>Ardeshir Zarisfi</strong> and <strong>Aryamehr Zarisfi</strong>.
+            Aryamehr leads the practical farming work including planting, crop care, harvesting, and maintenance.
+            Ardeshir manages planning, finance, compliance, and administration while also supporting day-to-day work on-site.
+          </p>
+          <ul class="feature-list">
+            <li>Family-run and locally focused</li>
+            <li>Fresh produce sold directly from the farm</li>
+            <li>Simple, honest, and sustainable operation</li>
+            <li>Committed to quality and customer experience</li>
+          </ul>
+        </div>
+        <div class="image-box">
+          <img src="./Picture of Me and Aryamehr.jpg" alt="Ardeshir and Aryamehr Zarisfi" />
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- CONTACT -->
-<section id="contact">
-  <h2>Contact Us</h2>
+  <section id="strawberries" style="background:#fff;">
+    <div class="container">
+      <h2 class="section-title">Our Strawberries</h2>
+      <p class="section-subtitle">
+        We specialise in outdoor-grown strawberries, carefully produced and hand-harvested for direct sale during the summer months.
+      </p>
+      <div class="card-grid">
+        <div class="card">
+          <h3>🍓 Freshly Picked</h3>
+          <p>Our strawberries are harvested at peak ripeness to deliver the best taste, colour, and freshness.</p>
+        </div>
+        <div class="card">
+          <h3>🌱 Grown with Care</h3>
+          <p>We use practical, cost-effective growing methods including protective growing sheets to help manage weather and quality.</p>
+        </div>
+        <div class="card">
+          <h3>🧺 Sold Directly</h3>
+          <p>Fruit is packed into tubs and sold directly on-site, reducing unnecessary transport and keeping produce fresher for longer.</p>
+        </div>
+      </div>
 
-  <div class="card">
-    <p>Email: ardeshirzarisfi06@gmail.com</p>
-    <p>Location: Aberdeenshire</p>
-  </div>
-</section>
+      <div class="card" style="margin-top:30px;">
+        <h3>Our Strawberry Varieties</h3>
+        <p>Click on each variety below to learn more about its sweetness, flavour, and overall character.</p>
 
-<footer>
-  <p>© 2026 Zarisfi Fruit Farm</p>
-</footer>
+        <div class="variety-buttons">
+          <button class="variety-btn" onclick="showVariety('cambridge')">Strawberry Cambridge Favourite A Bare Root</button>
+          <button class="variety-btn" onclick="showVariety('arabella')">C/S Arabella Standard Grade</button>
+          <button class="variety-btn" onclick="showVariety('prize')">C/S Prize Standard Grade</button>
+          <button class="variety-btn" onclick="showVariety('murano')">C/S Murano A+</button>
+        </div>
 
-<script>
-function show(type) {
-  const data = {
-    cambridge: "Classic balanced flavour, sweet and traditional.",
-    arabella: "Bright, fresh, and slightly tangy sweetness.",
-    prize: "Strong, rich strawberry flavour with deep sweetness.",
-    murano: "Very sweet, juicy, and modern premium taste."
-  };
+        <div id="variety-display" class="variety-display">
+          <h4>Strawberry Cambridge Favourite A Bare Root</h4>
+          <p>Cambridge Favourite is a classic variety known for its reliable cropping and balanced flavour. It offers a pleasant natural sweetness with a gentle, traditional strawberry taste that many people recognise and enjoy. The fruit is juicy, aromatic, and ideal for customers looking for a familiar, fresh strawberry with a soft texture and well-rounded flavour.</p>
+        </div>
+      </div>
 
-  document.getElementById("info").innerText = data[type];
-}
-</script>
+      <div class="stats">
+        <div class="stat">
+          <strong>June–August</strong>
+          <span>Main selling season</span>
+        </div>
+        <div class="stat">
+          <strong>2,000 m²</strong>
+          <span>Initial growing area</span>
+        </div>
+        <div class="stat">
+          <strong>2 tonnes</strong>
+          <span>Expected first full-season production</span>
+        </div>
+        <div class="stat">
+          <strong>Local Sale</strong>
+          <span>Direct-from-farm experience</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <section id="future">
+    <div class="container">
+      <h2 class="section-title">Future Plans</h2>
+      <p class="section-subtitle">
+        We are building Zarisfi Fruit Farm with long-term growth in mind while keeping our focus on quality, local service, and seasonal excellence.
+      </p>
+      <div class="grid-2">
+        <div class="image-box">
+          <img src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1200&q=80" alt="Young plants growing in a field" />
+        </div>
+        <div>
+          <ul class="feature-list">
+            <li>Expand strawberry production as customer awareness grows</li>
+            <li>Improve yields and efficiency over future seasons</li>
+            <li>Introduce other popular summer fruits in the coming years</li>
+            <li>Continue improving the on-site customer experience</li>
+            <li>Support local food production in the rural Aberdeenshire economy</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" style="background:#fff;">
+    <div class="container">
+      <h2 class="section-title">Contact Us</h2>
+      <p class="section-subtitle">
+        We would love to hear from you and welcome you to the farm during the strawberry season.
+      </p>
+      <div class="grid-2">
+        <div class="contact-box">
+          <h3 style="margin-bottom:16px; color: var(--secondary);">Visit or Enquire</h3>
+          <p><strong>Location:</strong> Mains of Drum, Aberdeenshire</p>
+          <p><strong>Season:</strong> Summer months, mainly June to August</p>
+          <p><strong>Email:</strong> your@email.com</p>
+          <p><strong>Phone:</strong> +44 0000 000000</p>
+          <p><strong>Opening:</strong> Flexible hours based on demand, weather, and harvest availability</p>
+        </div>
+
+        <div class="contact-box">
+          <h3 style="margin-bottom:16px; color: var(--secondary);">Send a Message</h3>
+          <form>
+            <input type="text" placeholder="Your Name" />
+            <input type="email" placeholder="Your Email" />
+            <textarea placeholder="Your Message"></textarea>
+            <button class="btn btn-primary" type="submit">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <h3 style="margin-bottom:10px;">Zarisfi Fruit Farm</h3>
+      <p>Fresh local strawberries from Aberdeenshire.</p>
+      <p style="margin-top:10px; font-size:0.95rem;">© 2026 Zarisfi Fruit Farm. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    const strawberryVarieties = {
+      cambridge: {
+        title: 'Strawberry Cambridge Favourite A Bare Root',
+        text: 'Cambridge Favourite is a classic variety known for its reliable cropping and balanced flavour. It offers a pleasant natural sweetness with a gentle, traditional strawberry taste that many people recognise and enjoy. The fruit is juicy, aromatic, and ideal for customers looking for a familiar, fresh strawberry with a soft texture and well-rounded flavour.'
+      },
+      arabella: {
+        title: 'C/S Arabella Standard Grade',
+        text: 'Arabella is valued for its attractive fruit and enjoyable eating quality. It has a sweet flavour with a fresh, lively finish, making it appealing for customers who enjoy strawberries that feel bright and refreshing. Its flavour profile is clean and juicy, with a good level of sweetness that makes it well suited for fresh summer sales.'
+      },
+      prize: {
+        title: 'C/S Prize Standard Grade',
+        text: 'Prize is a variety that stands out for its strong flavour and appealing sweetness. It has a fuller strawberry taste with a richer character, giving it a more premium feel when eaten fresh. The fruit is typically juicy and satisfying, making it a good option for customers who want a bold, flavourful strawberry.'
+      },
+      murano: {
+        title: 'C/S Murano A+',
+        text: 'Murano is known for its sweet taste, attractive appearance, and modern appeal. It offers a noticeably sugary flavour with a pleasant aroma and a smooth, juicy bite. This variety is especially good for customers who prefer strawberries with strong sweetness and a fresh, high-quality finish that feels ideal for direct-from-farm produce.'
+      }
+    };
+
+    function showVariety(key) {
+      const variety = strawberryVarieties[key];
+      const display = document.getElementById('variety-display');
+      display.innerHTML = `<h4>${variety.title}</h4><p>${variety.text}</p>`;
+    }
+  </script>
 </body>
 </html>
