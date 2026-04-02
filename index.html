@@ -73,9 +73,31 @@
     }
 
     .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
       font-size: 1.3rem;
       font-weight: bold;
       color: var(--primary);
+    }
+
+    .logo img {
+      height: 64px;
+      width: auto;
+      display: block;
+      border-radius: 10px;
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .logo-text small {
+      font-size: 0.8rem;
+      color: var(--secondary);
+      font-weight: 700;
     }
 
     .nav-links {
@@ -188,6 +210,47 @@
     .card h3 {
       margin-bottom: 12px;
       color: var(--secondary);
+    }
+
+    .variety-buttons {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .variety-btn {
+      width: 100%;
+      padding: 16px;
+      border: none;
+      border-radius: 14px;
+      background: var(--primary);
+      color: var(--white);
+      font: inherit;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.25s ease;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
+
+    .variety-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    .variety-display {
+      margin-top: 20px;
+      background: #fffaf9;
+      border-left: 5px solid var(--secondary);
+      padding: 22px;
+      border-radius: 14px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+    }
+
+    .variety-display h4 {
+      color: var(--secondary);
+      margin-bottom: 10px;
+      font-size: 1.15rem;
     }
 
     .feature-list {
@@ -303,7 +366,13 @@
 <body>
   <nav>
     <div class="container nav-inner">
-      <div class="logo">🍓 Zarisfi Fruit Farm</div>
+      <div class="logo">
+        <img src="logo.png" alt="Zarisfi Fruit Farm Logo" />
+        <div class="logo-text">
+          <span>Zarisfi Fruit Farm</span>
+          <small>Fresh from Our Farm to You</small>
+        </div>
+      </div>
       <div class="nav-links">
         <a href="#home">Home</a>
         <a href="#about">About Us</a>
@@ -387,12 +456,19 @@
 
       <div class="card" style="margin-top:30px;">
         <h3>Our Strawberry Varieties</h3>
-        <ul class="feature-list">
-          <li>Strawberry Cambridge Favourite A Bare Root</li>
-          <li>C/S Arabella Standard Grade</li>
-          <li>C/S Prize Standard Grade</li>
-          <li>C/S Murano A+</li>
-        </ul>
+        <p>Click on each variety below to learn more about its sweetness, flavour, and overall character.</p>
+
+        <div class="variety-buttons">
+          <button class="variety-btn" onclick="showVariety('cambridge')">Strawberry Cambridge Favourite A Bare Root</button>
+          <button class="variety-btn" onclick="showVariety('arabella')">C/S Arabella Standard Grade</button>
+          <button class="variety-btn" onclick="showVariety('prize')">C/S Prize Standard Grade</button>
+          <button class="variety-btn" onclick="showVariety('murano')">C/S Murano A+</button>
+        </div>
+
+        <div id="variety-display" class="variety-display">
+          <h4>Strawberry Cambridge Favourite A Bare Root</h4>
+          <p>Cambridge Favourite is a classic variety known for its reliable cropping and balanced flavour. It offers a pleasant natural sweetness with a gentle, traditional strawberry taste that many people recognise and enjoy. The fruit is juicy, aromatic, and ideal for customers looking for a familiar, fresh strawberry with a soft texture and well-rounded flavour.</p>
+        </div>
       </div>
 
       <div class="stats">
@@ -475,5 +551,32 @@
       <p style="margin-top:10px; font-size:0.95rem;">© 2026 Zarisfi Fruit Farm. All rights reserved.</p>
     </div>
   </footer>
+  <script>
+    const strawberryVarieties = {
+      cambridge: {
+        title: 'Strawberry Cambridge Favourite A Bare Root',
+        text: 'Cambridge Favourite is a classic variety known for its reliable cropping and balanced flavour. It offers a pleasant natural sweetness with a gentle, traditional strawberry taste that many people recognise and enjoy. The fruit is juicy, aromatic, and ideal for customers looking for a familiar, fresh strawberry with a soft texture and well-rounded flavour.'
+      },
+      arabella: {
+        title: 'C/S Arabella Standard Grade',
+        text: 'Arabella is valued for its attractive fruit and enjoyable eating quality. It has a sweet flavour with a fresh, lively finish, making it appealing for customers who enjoy strawberries that feel bright and refreshing. Its flavour profile is clean and juicy, with a good level of sweetness that makes it well suited for fresh summer sales.'
+      },
+      prize: {
+        title: 'C/S Prize Standard Grade',
+        text: 'Prize is a variety that stands out for its strong flavour and appealing sweetness. It has a fuller strawberry taste with a richer character, giving it a more premium feel when eaten fresh. The fruit is typically juicy and satisfying, making it a good option for customers who want a bold, flavourful strawberry.'
+      },
+      murano: {
+        title: 'C/S Murano A+',
+        text: 'Murano is known for its sweet taste, attractive appearance, and modern appeal. It offers a noticeably sugary flavour with a pleasant aroma and a smooth, juicy bite. This variety is especially good for customers who prefer strawberries with strong sweetness and a fresh, high-quality finish that feels ideal for direct-from-farm produce.'
+      }
+    };
+
+    function showVariety(key) {
+      const variety = strawberryVarieties[key];
+      const display = document.getElementById('variety-display');
+      display.innerHTML = `<h4>${variety.title}</h4><p>${variety.text}</p>`;
+    }
+  </script>
 </body>
 </html>
+
