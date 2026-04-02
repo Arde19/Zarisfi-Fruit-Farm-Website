@@ -48,7 +48,7 @@
 
     header {
       background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.35)),
-        url('https://images.unsplash.com/photo-1464965911861-746a04b4bca6?auto=format&fit=crop&w=1600&q=80') center/cover;
+        url('./Picture of Farm.png') center/cover;
       min-height: 90vh;
       color: var(--white);
       display: flex;
@@ -75,17 +75,20 @@
     .logo {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
       font-size: 1.3rem;
       font-weight: bold;
       color: var(--primary);
+      min-width: 0;
     }
 
     .logo img {
-      height: 64px;
-      width: auto;
+      width: 90px;
+      height: 90px;
+      object-fit: contain;
       display: block;
-      border-radius: 10px;
+      border-radius: 12px;
+      flex-shrink: 0;
     }
 
     .logo-text {
@@ -94,8 +97,14 @@
       line-height: 1.1;
     }
 
+    .logo-text span {
+      font-size: 0.95rem;
+      color: var(--primary);
+      font-weight: 800;
+    }
+
     .logo-text small {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       color: var(--secondary);
       font-weight: 700;
     }
@@ -344,7 +353,8 @@
     @media (max-width: 900px) {
       .grid-2,
       .card-grid,
-      .stats {
+      .stats,
+      .variety-buttons {
         grid-template-columns: 1fr;
       }
 
@@ -360,6 +370,23 @@
       .nav-links {
         gap: 12px;
       }
+
+      .logo {
+        gap: 10px;
+      }
+
+      .logo img {
+        width: 70px;
+        height: 70px;
+      }
+
+      .logo-text span {
+        font-size: 0.85rem;
+      }
+
+      .logo-text small {
+        font-size: 0.7rem;
+      }
     }
   </style>
 </head>
@@ -367,7 +394,7 @@
   <nav>
     <div class="container nav-inner">
       <div class="logo">
-        <img src="logo.png" alt="Zarisfi Fruit Farm Logo" />
+        <img src="./logo.png" alt="Zarisfi Fruit Farm Logo" onerror="this.style.display='none';" />
         <div class="logo-text">
           <span>Zarisfi Fruit Farm</span>
           <small>Fresh from Our Farm to You</small>
@@ -383,7 +410,7 @@
     </div>
   </nav>
 
-  <header id="home" style="background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.35)), url('Picture of Farm.png') center/cover;">
+  <header id="home">
     <div class="container hero">
       <div class="hero-content">
         <h1>Fresh Strawberries, Grown Locally in Aberdeenshire</h1>
@@ -427,7 +454,7 @@
           </ul>
         </div>
         <div class="image-box">
-          <img src="Picture of Me and Aryamehr.jpg" alt="Ardeshir and Aryamehr Zarisfi" />
+          <img src="./Picture of Me and Aryamehr.jpg" alt="Ardeshir and Aryamehr Zarisfi" />
         </div>
       </div>
     </div>
@@ -551,6 +578,7 @@
       <p style="margin-top:10px; font-size:0.95rem;">© 2026 Zarisfi Fruit Farm. All rights reserved.</p>
     </div>
   </footer>
+
   <script>
     const strawberryVarieties = {
       cambridge: {
@@ -579,4 +607,3 @@
   </script>
 </body>
 </html>
-
